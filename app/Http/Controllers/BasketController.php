@@ -26,21 +26,37 @@ class BasketController extends Controller
         } else {
             $order = $orderModel->find($sessionOrderId);
         }
-        $order->products()->attach($id);
 
-        return view('basket', compact('order'));
+        if ($order->products->contains($id)) {
+            $pivotRow = $order->products()->where('product_id', $id)->first()->pivot;
+            $pivotRow->count++;
+            $pivotRow->update();
+        } else {
+            $order->products()->attach($id);
+        }
+
+        return redirect()->route('basket');
     }
 
     public function basketRemove($id, Order $orderModel)
     {
         $sessionOrderId = session('orderId');
         if (!$sessionOrderId) {
-            return false;
+            return redirect()->route('basket');
         } else {
             $order = $orderModel->find($sessionOrderId);
         }
-        $order->products()->detach($id);
 
-        return view('basket', compact('order'));
+        if ($order->products->contains($id)) {
+            $pivotRow = $order->products()->where('product_id', $id)->first()->pivot;
+            if ($pivotRow->count >= 2) {
+                $pivotRow->count--;
+                $pivotRow->update();
+            } else {
+                $order->products()->detach($id);
+            }
+        }
+
+        return redirect()->route('basket');
     }
 }
