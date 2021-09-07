@@ -6,9 +6,11 @@
             <h3>{{$product->name}}</h3>
             <p>{{$product->price}} rub.</p>
             <p>
-                <a href="{{ route('basket') }}" class="btn btn-primary"
-                   role="button">Add to basket</a>
-                <a href="{{ route('product', [$product->Category->code, $product->code])}}" class="btn btn-default" role="button">Details</a>
+                <form action="{{route('basket-add', $product)}}" method="post">
+                @csrf
+                    <button type="submit" class="btn btn-primary" role="button">Add to basket</button>
+                    <a href="{{ route('product', [$product->Category->code, $product->code])}}" class="btn btn-default" role="button">Details</a>
+                </form>
             </p>
         </div>
     </div>
