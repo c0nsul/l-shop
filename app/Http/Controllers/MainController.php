@@ -19,11 +19,10 @@ class MainController extends Controller
         return view('categories', compact('categories'));
     }
 
-    public function category($category, Category $categoryModel, Product $productModel)
+    public function category($category, Category $categoryModel)
     {
         $category = $categoryModel::where("code", $category)->first();
-        $products = $productModel::where("category_id", $category->id)->get();
-        return view('category', compact('category', 'products'));
+        return view('category', compact('category'));
     }
 
     public function product($category,$product = null, Category $categoryModel)
