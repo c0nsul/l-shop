@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 
 class MainController extends Controller
 {
-    public function index()
+    public function index(Product $productModel)
     {
-        return view("index");
+        $products = $productModel::get();
+        return view("index", compact('products'));
     }
 
     public function categories(Category $categoryModel)
@@ -17,10 +19,11 @@ class MainController extends Controller
         return view('categories', compact('categories'));
     }
 
-    public function category($category, Category $categoryModel)
+    public function category($category, Category $categoryModel, Product $productModel)
     {
         $category = $categoryModel::where("code", $category)->first();
-        return view('category', compact('category'));
+        $products = $productModel::where("category_id", $category->id)->get();
+        return view('category', compact('category', 'products'));
     }
 
     public function product($category,$product = null, Category $categoryModel)
