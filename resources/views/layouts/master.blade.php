@@ -24,7 +24,6 @@
                 <li ><a href="{{ route('categories') }}">Categories</a>
                 </li>
                 <li ><a href="{{ route('basket') }}">Basket</a></li>
-                <li><a href="{{ route('index') }}">Home</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -35,8 +34,17 @@
     </div>
 </nav>
 
+
 <div class="container">
-    @yield('content')
+    <div class="starter-template">
+        @if(session()->has('success'))
+            <p class="alert alert-success">{{ session()->get('success') }}</p>
+        @endif
+        @if(session()->has('warning'))
+            <p class="alert alert-warning">{{ session()->get('warning') }}</p>
+        @endif
+        @yield('content')
+    </div>
 </div>
 </body>
 </html>

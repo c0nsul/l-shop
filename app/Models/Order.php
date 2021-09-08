@@ -10,6 +10,9 @@ class Order extends Model
 {
     use HasFactory;
 
+    private const ORDER_STATUS_0 = 0;
+    private const ORDER_STATUS_1 = 1;
+
     /**
      * @return BelongsToMany
      */
@@ -28,5 +31,24 @@ class Order extends Model
             $sum += $product->getPriceCalculation();
         }
         return $sum;
+    }
+
+    /**
+     * @param $name
+     * @param $phone
+     * @return bool
+     */
+    public function saveOrder($name, $phone)
+    {
+        if ($this->status == self::ORDER_STATUS_0) {
+            $this->name = $name;
+            $this->phone = $phone;
+            $this->status = self::ORDER_STATUS_1;
+            $this->save();
+            session()->forget('orderId');
+            return true;
+        } else {
+            return false;
+        }
     }
 }

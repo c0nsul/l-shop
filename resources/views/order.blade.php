@@ -1,39 +1,39 @@
-@extends('master')
+@extends('layouts.master')
 
 @section('title', 'Оформить заказ')
 
 @section('content')
-    <div class="starter-template">
-        <h1>Подтвердите заказ:</h1>
-        <div class="container">
-            <div class="row justify-content-center">
-                <p>Общая стоимость заказа: <b>71990 руб.</b></p>
-                <form action="/basket/accept" method="POST">
-                    <div>
-                        <p>Укажите свои имя и номер телефона, чтобы наш менеджер мог с вами связаться:</p>
 
-                        <div class="container">
-                            <div class="form-group">
-                                <label for="name" class="control-label col-lg-offset-3 col-lg-2">Имя: </label>
-                                <div class="col-lg-4">
-                                    <input type="text" name="name" id="name" value="" class="form-control">
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <div class="form-group">
-                                <label for="phone" class="control-label col-lg-offset-3 col-lg-2">Номер телефона: </label>
-                                <div class="col-lg-4">
-                                    <input type="text" name="phone" id="phone" value="" class="form-control">
-                                </div>
+    <h1>Confirm your order:</h1>
+    <div class="container">
+        <div class="row justify-content-center">
+            <p>Total: <b>{{ isset( $order) ? $order->getFullPrice() : 0 }} rub.</b></p>
+            <form action="{{route("basket-confirm")}}" method="POST">
+                @csrf
+                <div>
+                    <p>Please fill your phone and Name and we will contact you asap:</p>
+
+                    <div class="container">
+                        <div class="form-group">
+                            <label for="name" class="control-label col-lg-offset-3 col-lg-2">Name: </label>
+                            <div class="col-lg-4">
+                                <input type="text" required name="name" id="name" value="" class="form-control">
                             </div>
                         </div>
                         <br>
-                        <input type="hidden" name="_token" value="qhk4riitc1MAjlRcro8dvWchDTGkFDQ9Iacyyrkj">					<br>
-                        <input type="submit" class="btn btn-success" href="/basket/place" value="Подтвердить заказ">
+                        <br>
+                        <div class="form-group">
+                            <label for="phone" class="control-label col-lg-offset-3 col-lg-2">Phone: </label>
+                            <div class="col-lg-4">
+                                <input type="text" required name="phone" id="phone" value="" class="form-control">
+                            </div>
+                        </div>
                     </div>
-                </form>
-            </div>
+                    <br>
+                    <input type="submit" class="btn btn-success" value="Confirm">
+                </div>
+            </form>
         </div>
     </div>
+
 @endsection

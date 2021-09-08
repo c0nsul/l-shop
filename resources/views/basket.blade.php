@@ -1,10 +1,10 @@
-@extends('master')
+@extends('layouts.master')
 
 @section('title', 'Корзина')
 
 @section('content')
-    <div class="starter-template">
         <h1>Basket</h1>
+        @if(isset($order->products) && count($order->products)>0)
         <p>Checkout</p>
         <div class="panel">
             <table class="table table-striped">
@@ -43,21 +43,25 @@
                                     </form>
                                 </div>
                             </td>
-                            <td>{{ $product->price }} руб.</td>
-                            <td>{{ $product->getPriceCalculation($product->pivot->count) }} руб.</td>
+                            <td>{{ $product->price }} rub.</td>
+                            <td>{{ $product->getPriceCalculation($product->pivot->count) }} rub.</td>
                         </tr>
                     @endforeach
                 @endisset
                 <tr>
                     <td colspan="3">Total:</td>
-                    <td>{{ $order->getFullPrice() }} руб.</td>
+                    <td>{{ isset( $order) ? $order->getFullPrice() : 0 }} rub.</td>
                 </tr>
                 </tbody>
             </table>
             <br>
             <div class="btn-group pull-right" role="group">
-                <a type="button" class="btn btn-success" href="/basket/place">Checkout</a>
+                    <a type="button" class="btn btn-success" href="{{route("basket-place")}}">Checkout</a>
             </div>
         </div>
-    </div>
+        @else
+        <div class="panel" >
+            Basket is empty!
+        </div>
+        @endif
 @endsection
