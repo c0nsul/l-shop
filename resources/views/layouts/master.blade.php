@@ -27,8 +27,16 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/admin/home">Admin panel</a></li>
-           </ul>
+                @guest
+                    <li><a href="{{ route('login') }}">Admin panel</a></li>
+                    <li><a href="{{ route('register') }}">Register</a></li>
+                @endguest
+
+                @auth
+                    <li><a href="{{ route('home') }}">Admin panel</a></li>
+                    <li><a href="{{ route('get-logout') }}">Logout</a></li>
+                @endauth
+            </ul>
 
         </div>
     </div>
