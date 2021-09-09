@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 class BasketController extends Controller
 {
 
+    /**
+     * @param Request $request
+     * @param Order $orderModel
+     * @return RedirectResponse
+     */
     public function basketConfirm(Request $request, Order $orderModel)
     {
         $sessionOrderId = session('orderId');
@@ -59,6 +64,7 @@ class BasketController extends Controller
     /**
      * @param $id
      * @param Order $orderModel
+     * @param Product $productModel
      * @return RedirectResponse
      */
     public function basketAdd($id, Order $orderModel, Product $productModel)
@@ -90,6 +96,7 @@ class BasketController extends Controller
     /**
      * @param $id
      * @param Order $orderModel
+     * @param Product $productModel
      * @return RedirectResponse
      */
     public function basketRemove($id, Order $orderModel, Product $productModel)

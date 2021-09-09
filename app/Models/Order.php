@@ -10,8 +10,8 @@ class Order extends Model
 {
     use HasFactory;
 
-    private const ORDER_STATUS_0 = 0;
-    private const ORDER_STATUS_1 = 1;
+    public const ORDER_STATUS_0 = 0;
+    public const ORDER_STATUS_1 = 1;
 
     /**
      * @return BelongsToMany

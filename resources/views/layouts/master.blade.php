@@ -30,6 +30,7 @@
                 @guest
                     <li><a href="{{ route('login') }}">Admin panel</a></li>
                     <li><a href="{{ route('register') }}">Register</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
                 @endguest
 
                 @auth
