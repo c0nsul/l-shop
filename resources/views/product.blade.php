@@ -8,5 +8,8 @@
         <p>Price: <b>{{$product->price}} rub.</b></p>
         <img src="/storage/categories/{{$category->code}}.jpg">
         <p>{{$product->description}}</p>
-        <a class="btn btn-success" href="/basket/1/add">Add to basket</a>
+        <form action="{{route('basket-add', $product)}}" method="post">
+            @csrf
+            <button type="submit" class="btn btn-success" role="button">Add to basket</button>
+        </form>
 @endsection

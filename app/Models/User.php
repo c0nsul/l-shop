@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    private const IS_ADMIN = 1;
+    private const IS_NOT_ADMIN = 0;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -41,4 +44,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->is_admin === self::IS_ADMIN;
+    }
 }
