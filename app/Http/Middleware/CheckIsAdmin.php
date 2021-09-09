@@ -22,7 +22,7 @@ class CheckIsAdmin
             session()->flash('success', 'Welcome back '.$user->name);
             return redirect()->route('index');
         }
-        session()->flash('success', 'Welcome back Admin!');
+        //session()->flash('success', 'Welcome back Admin!');
         return $next($request);
     }
 }

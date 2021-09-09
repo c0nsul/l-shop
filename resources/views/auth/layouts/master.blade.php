@@ -29,10 +29,8 @@
 
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a
-                            href="/admin/categories">Category</a></li>
-                    <li><a href="/admin/products">Products</a>
-                    </li>
+                    <li><a href="{{route("categories.index")}}">Category</a></li>
+                    <li><a href="/admin/products">Products</a></li>
                     <li><a href="/admin/orders">Orders</a></li>
                 </ul>
 
