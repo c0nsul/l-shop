@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
@@ -40,14 +41,14 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param ProductRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $params = $request->all();
+        $params = $request->validated();
 
-        if ($request->file('image'))  {
+        if ($request->has('image')) {
             $path = $request->file('image')->store('products');
             $params['image'] = $path;
         }
@@ -81,15 +82,15 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param ProductRequest $request
      * @param Product $product
      * @return RedirectResponse
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $params = $request->all();
+        $params = $request->validated();
 
-        if ($request->file('image'))  {
+        if ($request->has('image')) {
             Storage::delete($product->image);
             $path = $request->file('image')->store('products');
             $params['image'] = $path;

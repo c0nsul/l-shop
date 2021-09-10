@@ -28,7 +28,7 @@
                     <td>{{ $category->name }}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <form action="{{ route('categories.destroy', $category) }}" method="POST">
+                            <form action="{{ route('categories.destroy', $category) }}" method="POST" onsubmit="return confirm('Delete category?');">
                                 <a class="btn btn-success" type="button" href="{{ route('categories.show', $category) }}">Open</a>
                                 <a class="btn btn-warning" type="button" href="{{ route('categories.edit', $category) }}">Edit</a>
                                 @csrf

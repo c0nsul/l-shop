@@ -36,7 +36,7 @@
                     <td>{{ $product->price }}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <form action="{{ route('products.destroy', $product) }}" method="POST">
+                            <form action="{{ route('products.destroy', $product) }}" method="POST" onsubmit="return confirm('Delete product?');">
                                 <a class="btn btn-success" type="button"
                                    href="{{ route('products.show', $product) }}">Open</a>
                                 <a class="btn btn-warning" type="button"
