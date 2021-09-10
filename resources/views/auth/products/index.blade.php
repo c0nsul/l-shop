@@ -12,19 +12,19 @@
                     #
                 </th>
                 <th>
-                    Код
+                    Code
                 </th>
                 <th>
-                    Название
+                    Name
                 </th>
                 <th>
-                    Категория
+                    Category
                 </th>
                 <th>
-                    Цена
+                    Price
                 </th>
                 <th>
-                    Действия
+                    Actions
                 </th>
             </tr>
             @foreach($products as $product)
@@ -38,18 +38,18 @@
                         <div class="btn-group" role="group">
                             <form action="{{ route('products.destroy', $product) }}" method="POST">
                                 <a class="btn btn-success" type="button"
-                                   href="{{ route('products.show', $product) }}">Открыть</a>
+                                   href="{{ route('products.show', $product) }}">Open</a>
                                 <a class="btn btn-warning" type="button"
-                                   href="{{ route('products.edit', $product) }}">Редактировать</a>
+                                   href="{{ route('products.edit', $product) }}">Edit</a>
                                 @csrf
                                 @method('DELETE')
-                                <input class="btn btn-danger" type="submit" value="Удалить"></form>
+                                <input class="btn btn-danger" type="submit" value="Delete"></form>
                         </div>
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
-        <a class="btn btn-success" type="button" href="{{ route('products.create') }}">Добавить товар</a>
+        <a class="btn btn-success" type="button" href="{{ route('products.create') }}">Add new product</a>
     </div>
 @endsection

@@ -6,7 +6,7 @@
         <h5>{{$product->category->name}}</h5>
         <h1>{{$product->name}}</h1>
         <p>Price: <b>{{$product->price}} rub.</b></p>
-        <img src="/storage/categories/{{$category->code}}.jpg">
+        <img src="{{Storage::url($product->image)}}">
         <p>{{$product->description}}</p>
         <form action="{{route('basket-add', $product)}}" method="post">
             @csrf

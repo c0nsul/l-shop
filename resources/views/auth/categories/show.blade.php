@@ -4,15 +4,15 @@
 
 @section('content')
     <div class="col-md-12">
-        <h1>Категория Бытовая техника</h1>
+        <h1>Category "{{$category->name}}"</h1>
         <table class="table">
             <tbody>
             <tr>
                 <th>
-                    Поле
+                    Field
                 </th>
                 <th>
-                    Значение
+                    Value
                 </th>
             </tr>
             <tr>
@@ -20,24 +20,29 @@
                 <td>{{ $category->id }}</td>
             </tr>
             <tr>
-                <td>Код</td>
+                <td>Code</td>
                 <td>{{ $category->code }}</td>
             </tr>
             <tr>
-                <td>Название</td>
+                <td>Name</td>
                 <td>{{ $category->name }}</td>
             </tr>
             <tr>
-                <td>Описание</td>
+                <td>Description</td>
                 <td>{{ $category->description }}</td>
             </tr>
             <tr>
-                <td>Картинка</td>
-                <td><img src="http://laravel-diplom-1.rdavydov.ru/storage/categories/appliance.jpg"
-                         height="240px"></td>
+                <td>Image</td>
+                <td>
+                    @if(isset($category->image))
+                        <img src="{{ Storage::url($category->image)}}" height="240px">
+                    @else
+                        no image
+                    @endif
+                </td>
             </tr>
             <tr>
-                <td>Кол-во товаров</td>
+                <td>Products counter</td>
                 <td>{{ $category->products->count() }}</td>
             </tr>
             </tbody>

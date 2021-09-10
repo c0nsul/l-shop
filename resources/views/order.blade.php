@@ -11,7 +11,7 @@
             <form action="{{route("basket-confirm")}}" method="POST">
                 @csrf
                 <div>
-                    <p>Please fill your phone and Name and we will contact you asap:</p>
+                    <p>Please fill your phone and your name and we will contact you asap:</p>
 
                     <div class="container">
                         <div class="form-group">

@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -43,7 +44,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request, Category $category)
     {
-        $category::create($request->all());
+        $params = $request->all();
+
+        if ($request->file('image'))  {
+            $path = $request->file('image')->store('categories');
+            $params['image'] = $path;
+        }
+        $category::create($params);
         return redirect()->route('categories.index');
     }
 
@@ -74,11 +81,18 @@ class CategoryController extends Controller
      *
      * @param Request $request
      * @param Category $category
-     * @return Response
+     * @return RedirectResponse
      */
     public function update(Request $request, Category $category)
     {
-        $category->update($request->all());
+        $params = $request->all();
+
+        if ($request->file('image'))  {
+            Storage::delete($category->image);
+            $path = $request->file('image')->store('categories');
+            $params['image'] = $path;
+        }
+        $category->update($params);
         return redirect()->route('categories.index');
     }
 
@@ -90,6 +104,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        Storage::delete($category->image);
         $category->delete();
         return redirect()->route('categories.index');
     }

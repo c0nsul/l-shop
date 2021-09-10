@@ -1,6 +1,6 @@
 <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-        <img src="/storage/products/{{ $product->image}}.jpg" alt="iPhone X 64GB">
+        <img src="{{Storage::url($product->image)}}" alt="{{$product->name}}">
         <div class="caption">
             <h5>{{$product->Category->name}}</h5>
             <h3>{{$product->name}}</h3>
