@@ -30,8 +30,8 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="{{route("categories.index")}}">Category</a></li>
-                    <li><a href="/admin/products">Products</a></li>
-                    <li><a href="/admin/orders">Orders</a></li>
+                    <li><a href="{{ route('products.index') }}">Products</a></li>
+                    <li><a href="{{ route('home') }}">Orders</a></li>
                 </ul>
 
                 @guest

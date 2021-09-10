@@ -18,9 +18,9 @@ class CategoryController extends Controller
      *
      * @return Response
      */
-    public function index(Category $category)
+    public function index(Category $categoryModel)
     {
-        $categories = $category::get();
+        $categories = $categoryModel::get();
         return view("auth.categories.index", compact("categories"));
     }
 

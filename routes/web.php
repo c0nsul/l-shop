@@ -36,6 +36,7 @@ Route::group([
         Route::get('/orders/{id}', [OrderController::class, "view"])->name('view');
     });
     Route::resource('categories', "\App\Http\Controllers\Admin\CategoryController");
+    Route::resource('products', '\App\Http\Controllers\Admin\ProductController');
 });
 
 Route::get("/", [MainController::class, 'index'])->name('index');
