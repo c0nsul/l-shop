@@ -25,7 +25,7 @@ class CategoryRequest extends FormRequest
     {
         $updateRule = isset($this->category->id) ? "," . $this->category->id : null;
         return [
-            'code' => 'required|min:3|max:255|unique:categories,code'. $updateRule,
+            'code' => 'required|min:3|max:255|unique:categories,code' . $updateRule,
             'name' => 'required|min:3|max:255',
             'description' => 'required|min:5',
         ];

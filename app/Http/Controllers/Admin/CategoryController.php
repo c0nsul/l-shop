@@ -63,7 +63,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return view('auth.categories.show',  compact("category"));
+        return view('auth.categories.show', compact("category"));
     }
 
     /**

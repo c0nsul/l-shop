@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Order;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 
@@ -36,7 +35,8 @@ class OrderController extends Controller
      * @param Order $orderModel
      * @return Application|Factory|View
      */
-    public function view($id, Order $orderModel) {
+    public function view($id, Order $orderModel)
+    {
         $order = $orderModel::findOrFail($id);
         return view("auth.orders.view", compact("order"));
     }
