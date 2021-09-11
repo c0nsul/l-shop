@@ -39,6 +39,10 @@
                         <li @routeactive("home")>
                             <a href="{{ route('home') }}">Orders</a>
                         </li>
+
+                        <li>
+                            <a onclick="return confirm('Really?')" href="{{ route('reset') }}">Reset project</a>
+                        </li>
                     </ul>
                 @endadmin
 

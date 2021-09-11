@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ResetController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\MainController;
@@ -69,4 +70,5 @@ Route::get("/categories", [MainController::class, "categories"])->name('categori
 Route::get("/{category}", [MainController::class, "category"])->name('category');
 Route::get('/{category}/{product?}', [MainController::class, "product"])->name('product');
 
+Route::get('reset', [ResetController::class, "reset"])->name('reset');
 
