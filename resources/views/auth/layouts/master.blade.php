@@ -28,18 +28,26 @@
             </a>
 
             <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{route("categories.index")}}">Category</a></li>
-                    <li><a href="{{ route('products.index') }}">Products</a></li>
-                    <li><a href="{{ route('home') }}">Orders</a></li>
-                </ul>
+                @admin
+                    <ul class="nav navbar-nav">
+                        <li @routeactive("categories.index")>
+                            <a href="{{route("categories.index")}}">Category</a>
+                        </li>
+                        <li @routeactive("products.index")>
+                            <a href="{{ route('products.index') }}">Products</a>
+                        </li>
+                        <li @routeactive("home")>
+                            <a href="{{ route('home') }}">Orders</a>
+                        </li>
+                    </ul>
+                @endadmin
 
                 @guest
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item">
+                        <li class="nav-item @if(Route::currentRouteNamed('login')) active @endif" >
                             <a class="nav-link" href="{{ route('login') }}">Login</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item @if(Route::currentRouteNamed('register')) active @endif" >
                             <a class="nav-link" href="{{ route('register') }}">Register</a>
                         </li>
                     </ul>
@@ -51,7 +59,11 @@
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false" v-pre>
-                                Admin
+                                @admin
+                                    Admin
+                                @else
+                                    User
+                                @endadmin
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

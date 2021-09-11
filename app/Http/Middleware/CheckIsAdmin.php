@@ -19,7 +19,7 @@ class CheckIsAdmin
     {
         $user = Auth::user();
         if (!$user->isAdmin()){
-            session()->flash('success', 'Welcome back '.$user->name);
+            //session()->flash('success', 'Welcome back '.$user->name);
             return redirect()->route('index');
         }
         //session()->flash('success', 'Welcome back Admin!');

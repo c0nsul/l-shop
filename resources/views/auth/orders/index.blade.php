@@ -38,7 +38,14 @@
                     <td>
                         <div class="btn-group" role="group">
                             <a class="btn btn-success" type="button"
-                               href="{{route("view", $order->id)}}">Open</a>
+
+                               @admin
+                                    href="{{route("show", $order->id)}}"
+                               @else
+                                    href="{{route("person.orders.show", $order->id)}}"
+                               @endadmin
+
+                            >Open</a>
                         </div>
                     </td>
                 </tr>

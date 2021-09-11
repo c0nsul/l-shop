@@ -3,9 +3,14 @@
 @section('title', 'Order Details')
 
 @section('content')
-    <h1>Basket</h1>
+    <h1>Order {{$order->id}}</h1>
     @if(isset($order->products) && count($order->products)>0)
-        <p>Order Details</p>
+        <p>Order Details:</p>
+        <br/>
+        <p>Name: <b>{{ $order->name }}</b></p>
+        <p>Phone: <b>{{ $order->phone }}</b></p>
+
+
         <div class="panel">
             <table class="table table-striped">
                 <thead>
@@ -22,7 +27,7 @@
                         <tr>
                             <td>
                                 <a href="{{ route('product', [$product->category->code, $product->code]) }}">
-                                    <img height="56px" src="/storage/products/{{$product->code}}.jpg">
+                                    <img height="56px" src="{{Storage::url($product->image)}}">
                                     {{ $product->name }}
                                 </a>
                             </td>
@@ -41,7 +46,13 @@
             </table>
             <br>
             <div class="btn-group pull-right" role="group">
-                <a type="button" class="btn btn-success" href="{{route("home")}}">Back to orders</a>
+                <a type="button" class="btn btn-success"
+                   @admin
+                        href="{{route("home")}}"
+                   @else
+                       href="{{route("person.orders.index")}}"
+                   @endadmin
+                       >Back to orders</a>
             </div>
         </div>
     @endif

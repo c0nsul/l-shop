@@ -31,13 +31,11 @@ class OrderController extends Controller
     }
 
     /**
-     * @param $id
-     * @param Order $orderModel
+     * @param Order $order
      * @return Application|Factory|View
      */
-    public function view($id, Order $orderModel)
+    public function show(Order $order)
     {
-        $order = $orderModel::findOrFail($id);
-        return view("auth.orders.view", compact("order"));
+        return view("auth.orders.show", compact("order"));
     }
 }
