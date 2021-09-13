@@ -52,6 +52,7 @@
             @endforeach
             </tbody>
         </table>
+        {{ $orders->links() }}
         @else
             No new orders!
         @endif

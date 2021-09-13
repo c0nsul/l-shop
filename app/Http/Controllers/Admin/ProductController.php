@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    private $pageLimit = 10;
+
     /**
      * Display a listing of the resource.
      *
@@ -21,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        $products = Product::paginate($this->pageLimit);
         return view('auth.products.index', compact('products'));
     }
 

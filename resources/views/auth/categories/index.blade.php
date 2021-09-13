@@ -40,6 +40,8 @@
             @endforeach
             </tbody>
         </table>
+        {{ $categories->links() }}
+
         <a class="btn btn-success" type="button"
            href="{{ route('categories.create') }}">Add new category</a>
     </div>

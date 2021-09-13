@@ -10,6 +10,8 @@ use Illuminate\Contracts\View\View;
 
 class OrderController extends Controller
 {
+    private $pageLimit = 10;
+
     /**
      * Create a new controller instance.
      *
@@ -26,7 +28,7 @@ class OrderController extends Controller
      */
     public function index(Order $orderModel)
     {
-        $orders = $orderModel::where("status", $orderModel::ORDER_STATUS_1)->get();
+        $orders = $orderModel::where("status", $orderModel::ORDER_STATUS_1)->paginate($this->pageLimit);
         return view("auth.orders.index", compact("orders"));
     }
 

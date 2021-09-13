@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+    private $pageLimit = 10;
+
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +24,7 @@ class CategoryController extends Controller
      */
     public function index(Category $categoryModel)
     {
-        $categories = $categoryModel::get();
+        $categories = $categoryModel::paginate($this->pageLimit);
         return view("auth.categories.index", compact("categories"));
     }
 
