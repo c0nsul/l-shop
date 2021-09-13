@@ -38,6 +38,7 @@ class MainController extends Controller
             }
         }
 
+        //pagination influence: changing page should not reset filter (->withPath("?" . $request->getQueryString());)
         $products = $productsQuery->paginate($this->pageLimit)->withPath("?" . $request->getQueryString());
 
         return view("index", compact('products'));
