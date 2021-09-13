@@ -30,6 +30,9 @@ class ProductRequest extends FormRequest
             'description' => 'required|min:5',
             'price' => 'required|numeric|min:1',
             'category_id' => 'required|numeric',
+            'hit' => 'string',
+            'new' => 'string',
+            'recommend' => 'string',
         ];
 
         /*

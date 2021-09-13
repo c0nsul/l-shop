@@ -1,6 +1,6 @@
 @extends('auth.layouts.master')
 
-@section('title', 'Продукт ' . $product->name)
+@section('title', 'Product ' . $product->name)
 
 @section('content')
     <div class="col-md-12">
@@ -9,10 +9,10 @@
             <tbody>
             <tr>
                 <th>
-                    Поле
+                    Field
                 </th>
                 <th>
-                    Значение
+                    Value
                 </th>
             </tr>
             <tr>
@@ -20,25 +20,46 @@
                 <td>{{ $product->id}}</td>
             </tr>
             <tr>
-                <td>Код</td>
+                <td>Code</td>
                 <td>{{ $product->code }}</td>
             </tr>
             <tr>
-                <td>Название</td>
+                <td>Name</td>
                 <td>{{ $product->name }}</td>
             </tr>
             <tr>
-                <td>Описание</td>
+                <td>Description</td>
                 <td>{{ $product->description }}</td>
             </tr>
             <tr>
-                <td>Картинка</td>
-                <td><img src="http://laravel-diplom-1.rdavydov.ru/storage/products/bosch.jpg" height="240px"></td>
+                <td>Image</td>
+                <td>
+                    <img src="{{ Storage::url($product->image)}}" height="240px">
+                </td>
             </tr>
             <tr>
-                <td>Категория</td>
+                <td>Category</td>
                 <td>{{ $product->category->name }}</td>
             </tr>
+            <tr>
+                <td>Attribute</td>
+                <td>
+                    <div class="labels">
+                        @if($product->isNew())
+                            <span class="badge badge-success">New</span>
+                        @endif
+
+                        @if($product->isRecommend())
+                            <span class="badge badge-warning">Recomend</span>
+                        @endif
+
+                        @if($product->isHit())
+                            <span class="badge badge-danger">Sales hit!</span>
+                        @endif
+                    </div>
+                </td>
+            </tr>
+
             </tbody>
         </table>
     </div>

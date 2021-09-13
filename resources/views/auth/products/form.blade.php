@@ -31,9 +31,7 @@
                         <input type="text" class="form-control" name="code" id="code"
                                value="@isset($product){{ $product->code }}@endisset">
 
-                        @error('code')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @include('auth.layouts.error', ['fieldName' => 'code'])
                     </div>
                 </div>
                 <br>
@@ -43,9 +41,7 @@
                         <input type="text" class="form-control" name="name" id="name"
                                value="@isset($product){{ $product->name }}@endisset">
 
-                        @error('name')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @include('auth.layouts.error', ['fieldName' => 'name'])
                     </div>
                 </div>
                 <br>
@@ -70,9 +66,7 @@
 								<textarea name="description" id="description" cols="72"
                                           rows="7">@isset($product){{ $product->description }}@endisset</textarea>
 
-                        @error('description')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @include('auth.layouts.error', ['fieldName' => 'description'])
                     </div>
                 </div>
                 <br>
@@ -91,11 +85,27 @@
                         <input type="text" class="form-control" name="price" id="price"
                                value="@isset($product){{ $product->price }}@endisset">
 
-                        @error('price')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        @include('auth.layouts.error', ['fieldName' => 'price'])
                     </div>
                 </div>
+                <br>
+                    @foreach([
+                        'hit' => 'Hit',
+                        'new' => 'New',
+                        'recommend' => 'Recommend'
+                    ] as $field => $title)
+                        <div class="input-group row">
+                            <label for="code" class="col-sm-2 col-form-label">{{$title}}: </label>
+                            <div class="col-sm-6">
+                                <input type="checkbox" name="{{$field}}" id="{{$field}}"
+                                       @if(isset($product) && $product->$field === 1)
+                                            checked="checked"
+                                       @endif
+                                >
+                            </div>
+                        </div>
+                    @endforeach
+                    <br/>
                 <button class="btn btn-success">Save</button>
             </div>
         </form>

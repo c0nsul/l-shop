@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'code', 'price', 'category_id', 'description', 'image'];
+    private const setTrue = 1;
+    private const setFalse = 0;
+    protected $fillable = ['name', 'code', 'price', 'category_id', 'description', 'image', 'new', 'hit', 'recommend'];
 
     /**
      * @return BelongsTo
@@ -27,5 +29,56 @@ class Product extends Model
             return $this->pivot->count * $this->price;
         }
         return $this->price;
+    }
+
+    /*
+
+    /**
+     * @param $value
+     */
+    public function setNewAttribute($value)
+    {
+        $this->attributes['new'] = $value === 'on' ? self::setTrue : self::setFalse;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setHitAttribute($value)
+    {
+        $this->attributes['hit'] = $value === 'on' ? self::setTrue : self::setFalse;
+    }
+
+    /**
+     * @param $value
+     */
+    public function setRecommendAttribute($value)
+    {
+        $this->attributes['recommend'] = $value === 'on' ? self::setTrue : self::setFalse;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHit()
+    {
+        return $this->hit === self::setTrue;
+
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNew()
+    {
+        return $this->new === self::setTrue;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRecommend()
+    {
+        return $this->recommend === self::setTrue;
     }
 }
