@@ -13,6 +13,7 @@ class Product extends Model
     private const setFalse = 0;
     protected $fillable = ['name', 'code', 'price', 'category_id', 'description', 'image', 'new', 'hit', 'recommend'];
 
+
     /**
      * @return BelongsTo
      */
@@ -60,7 +61,7 @@ class Product extends Model
     /**
      * @return bool
      */
-    public function isHit()
+    public function isHit(): bool
     {
         return $this->hit === self::setTrue;
 
@@ -69,7 +70,7 @@ class Product extends Model
     /**
      * @return bool
      */
-    public function isNew()
+    public function isNew(): bool
     {
         return $this->new === self::setTrue;
     }
@@ -77,7 +78,7 @@ class Product extends Model
     /**
      * @return bool
      */
-    public function isRecommend()
+    public function isRecommend(): bool
     {
         return $this->recommend === self::setTrue;
     }
