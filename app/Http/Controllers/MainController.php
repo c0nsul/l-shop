@@ -8,7 +8,6 @@ use App\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
 
 
 class MainController extends Controller
@@ -22,7 +21,7 @@ class MainController extends Controller
      */
     public function index(ProductsFilterRequest $request,Product $productModel)
     {
-        $productsQuery = $productModel::query();
+        $productsQuery = $productModel::with('Category');
 
         if ($request->filled('price_from')) {
             $productsQuery->where('price', '>=', $request->price_from);
@@ -38,7 +37,8 @@ class MainController extends Controller
             }
         }
 
-        //pagination influence: changing page should not reset filter (->withPath("?" . $request->getQueryString());)
+        //pagination influence: changing page should not reset filter
+        // (->withPath("?" . $request->getQueryString());)
         $products = $productsQuery->paginate($this->pageLimit)->withPath("?" . $request->getQueryString());
 
         return view("index", compact('products'));
