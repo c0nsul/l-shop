@@ -5,15 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     private const setTrue = 1;
     private const setFalse = 0;
     protected $table = 'products';
-    protected $fillable = ['name', 'code', 'price', 'category_id', 'description', 'image', 'new', 'hit', 'recommend'];
+    protected $fillable = [
+        'name',
+        'code',
+        'price',
+        'category_id',
+        'description',
+        'image',
+        'new',
+        'hit',
+        'recommend',
+        'count'
+    ];
 
 
     /**
@@ -33,6 +46,16 @@ class Product extends Model
             return $this->pivot->count * $this->price;
         }
         return $this->price;
+    }
+
+    /**
+     * @param $query
+     * @param $code
+     * @return mixed
+     */
+    public function scopeByCode($query, $code)
+    {
+        return $query->where('code', $code);
     }
 
     /**
@@ -63,7 +86,6 @@ class Product extends Model
     }
 
 
-
     /**
      * @param $value
      */
@@ -86,6 +108,10 @@ class Product extends Model
     public function setRecommendAttribute($value)
     {
         $this->attributes['recommend'] = $value === 'on' ? self::setTrue : self::setFalse;
+    }
+
+    public function isAvailable(){
+        return !$this->trashed() && $this->count > self::setFalse;
     }
 
     /**

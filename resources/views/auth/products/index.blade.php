@@ -24,6 +24,9 @@
                     Price
                 </th>
                 <th>
+                    Count
+                </th>
+                <th>
                     Actions
                 </th>
             </tr>
@@ -34,6 +37,7 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->Category->name }}</td>
                     <td>{{ $product->price }}</td>
+                    <td>{{ $product->count }}</td>
                     <td>
                         <div class="btn-group" role="group">
                             <form action="{{ route('products.destroy', $product) }}" method="POST" onsubmit="return confirm('Delete product?');">

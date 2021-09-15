@@ -3,7 +3,7 @@
 @section('title', 'Товар')
 
 @section('content')
-        <h5>{{$product->category->name}}</h5>
+        <h5>{{$product->Category->name}}</h5>
         <h1>{{$product->name}}</h1>
         <p>Price: <b>{{$product->price}} rub.</b></p>
         <div >
@@ -22,7 +22,11 @@
         <img src="{{Storage::url($product->image)}}">
         <p>{{$product->description}}</p>
         <form action="{{route('basket-add', $product)}}" method="post">
-            @csrf
-            <button type="submit" class="btn btn-success" role="button">Add to basket</button>
+
+            @if($product->isAvailable())
+                <button type="submit" class="btn btn-success" role="button">Add to basket</button>
+            @else
+                Not available
+            @endif
         </form>
 @endsection

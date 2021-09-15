@@ -4,7 +4,7 @@
 
 @section('content')
     <h1>Order {{$order->id}}</h1>
-    @if(isset($order->products) && count($order->products)>0)
+    @if(isset($products) && count($products)>0)
         <p>Order Details:</p>
         <br/>
         <p>Name: <b>{{ $order->name }}</b></p>
@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                 @isset($order->products)
-                    @foreach($order->products as $product)
+                    @foreach($products as $product)
                         <tr>
                             <td>
                                 <a href="{{ route('product', [isset($category) ? $category->code : $product->Category->code, $product->code]) }}">
@@ -40,7 +40,7 @@
                 @endisset
                 <tr>
                     <td colspan="3">Total:</td>
-                    <td>{{ isset( $order) ? $order->getFullSum() : 0 }} rub.</td>
+                    <td>{{ isset( $order) ? $order->calculateFullSum() : 0 }} rub.</td>
                 </tr>
                 </tbody>
             </table>

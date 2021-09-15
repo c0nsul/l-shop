@@ -67,16 +67,13 @@ class MainController extends Controller
 
     /**
      * @param $category
-     * @param $productCode
      * @param Product $productModel
-     * @param Category $categoryModel
+     * @param $productCode
      * @return Application|Factory|View
      */
-    public function product($category,$productCode, Product $productModel, Category $categoryModel)
-    {
-        $product = $productModel::where("code", $productCode)->first();
-        $category = $categoryModel::where("code", $category)->first();
-        return view("product", compact('product', 'category'));
+    public function product($category, Product $productModel, $productCode) {
+        $product = $productModel::withTrashed()->byCode($productCode)->first();
+        return view('product', compact('product'));
     }
 
 }

@@ -18,4 +18,14 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    /**
+     * @param $query
+     * @param $code
+     * @return mixed
+     */
+    public function scopeByCode($query, $code)
+    {
+        return $query->where('code', $code);
+    }
 }

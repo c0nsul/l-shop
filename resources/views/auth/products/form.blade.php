@@ -88,6 +88,16 @@
                         @include('auth.layouts.error', ['fieldName' => 'price'])
                     </div>
                 </div>
+                    <br>
+                    <div class="input-group row">
+                        <label for="count" class="col-sm-2 col-form-label">Count: </label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="count" id="count"
+                                   value="@isset($product){{ $product->count }}@endisset">
+
+                            @include('auth.layouts.error', ['fieldName' => 'count'])
+                        </div>
+                    </div>
                 <br>
                     @foreach([
                         'hit' => 'Hit',
