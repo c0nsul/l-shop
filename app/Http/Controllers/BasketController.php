@@ -33,7 +33,7 @@ class BasketController extends Controller
         } else {
             session()->flash('warning', 'Something went wrong');
         }
-
+        $orderModel::eraseOrderSum();
         return redirect()->route('index');
     }
 
@@ -79,6 +79,7 @@ class BasketController extends Controller
         }
 
         $product = $productModel::find($id);
+        $orderModel::changeFullSum($product->price);
 
         if ($order->products->contains($id)) {
             $pivotRow = $order->products()->where('product_id', $id)->first()->pivot;
@@ -114,6 +115,7 @@ class BasketController extends Controller
         }
 
         $product = $productModel::find($id);
+        $orderModel::changeFullSum(-$product->price);
 
         if ($order->products->contains($id)) {
             $pivotRow = $order->products()->where('product_id', $id)->first()->pivot;

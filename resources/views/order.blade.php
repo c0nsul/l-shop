@@ -7,7 +7,7 @@
     <h1>Confirm your order:</h1>
     <div class="container">
         <div class="row justify-content-center">
-            <p>Total: <b>{{ isset( $order) ? $order->getFullPrice() : 0 }} rub.</b></p>
+            <p>Total: <b>{{ isset( $order) ? $order->calculateFullSum() : 0 }} rub.</b></p>
             <form action="{{route("basket-confirm")}}" method="POST">
                 @csrf
                 <div>

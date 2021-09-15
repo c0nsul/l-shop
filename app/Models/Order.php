@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Session\SessionManager;
+use Illuminate\Session\Store;
 
 class Order extends Model
 {
@@ -22,15 +25,49 @@ class Order extends Model
     }
 
     /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', self::ORDER_STATUS_1);
+    }
+
+    /**
      * @return int
      */
-    public function getFullPrice(): int
+    public function calculateFullSum(): int
     {
         $sum = 0;
         foreach ($this->products as $product) {
             $sum += $product->getPriceCalculation();
         }
         return $sum;
+    }
+
+    /**
+     *
+     */
+    public static function eraseOrderSum()
+    {
+        session()->forget('full_order_sum');
+    }
+
+    /**
+     * @param $changeSum
+     */
+    public static function changeFullSum($changeSum)
+    {
+        $sum = self::getFullSum() + $changeSum;
+        session(['full_order_sum' => $sum]);
+    }
+
+    /**
+     * @return Application|SessionManager|Store|mixed
+     */
+    public static function getFullSum()
+    {
+        return session('full_order_sum', self::ORDER_STATUS_0);
     }
 
     /**

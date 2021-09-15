@@ -28,7 +28,7 @@ class OrderController extends Controller
      */
     public function index(Order $orderModel)
     {
-        $orders = $orderModel::with('Category')->where("status", $orderModel::ORDER_STATUS_1)->paginate($this->pageLimit);
+        $orders = $orderModel::active()->paginate($this->pageLimit);
         return view("auth.orders.index", compact("orders"));
     }
 

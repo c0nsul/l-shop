@@ -19,11 +19,9 @@ class BasketIsNotEmpty
     public function handle(Request $request, Closure $next)
     {
         $sessionOrderId = session('orderId');
-        if (!is_null($sessionOrderId)) {
-            $order = Order::findOrFail($sessionOrderId);
-            if ($order->products->count() > 0) {
+
+        if (!is_null($sessionOrderId) && Order::getFullSum() > 0) {
                 return $next($request);
-            }
         }
         session()->flash('warning', 'Your basket is empty');
         return redirect()->route('index');

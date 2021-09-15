@@ -10,9 +10,9 @@ class Product extends Model
 {
     use HasFactory;
 
-    protected $table = 'products';
     private const setTrue = 1;
     private const setFalse = 0;
+    protected $table = 'products';
     protected $fillable = ['name', 'code', 'price', 'category_id', 'description', 'image', 'new', 'hit', 'recommend'];
 
 
@@ -27,14 +27,42 @@ class Product extends Model
     /**
      * @return float|int|mixed
      */
-    public function getPriceCalculation() {
+    public function getPriceCalculation()
+    {
         if (!is_null($this->pivot)) {
             return $this->pivot->count * $this->price;
         }
         return $this->price;
     }
 
-    /*
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeHit($query)
+    {
+        return $query->where('hit', self::setTrue);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeNew($query)
+    {
+        return $query->where('new', self::setTrue);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeRecommend($query)
+    {
+        return $query->where('recommend', self::setTrue);
+    }
+
+
 
     /**
      * @param $value

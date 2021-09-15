@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate($this->pageLimit);
+        $products = Product::with('Category')->paginate($this->pageLimit);
         return view('auth.products.index', compact('products'));
     }
 

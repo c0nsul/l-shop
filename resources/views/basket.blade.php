@@ -21,7 +21,7 @@
                     @foreach($order->products as $product)
                         <tr>
                             <td>
-                                <a href="{{ route('product', [$product->category->code, $product->code]) }}">
+                                <a href="{{ route('product', [isset($category) ? $category->code : $product->Category->code, $product->code]) }}">
                                     <img height="56px" src="{{Storage::url($product->image)}}">
                                     {{ $product->name }}
                                 </a>
@@ -50,7 +50,7 @@
                 @endisset
                 <tr>
                     <td colspan="3">Total:</td>
-                    <td>{{ isset( $order) ? $order->getFullPrice() : 0 }} rub.</td>
+                    <td>{{ isset( $order) ? $order->getFullSum() : 0 }} rub.</td>
                 </tr>
                 </tbody>
             </table>
