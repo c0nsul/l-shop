@@ -36,10 +36,10 @@
                                     </form>
 
                                     <form action="{{ route('basket-add', $product) }}" method="POST">
+                                        @csrf
                                         <button type="submit" class="btn btn-success" href="#">
                                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                         </button>
-                                        @csrf
                                     </form>
                                 </div>
                             </td>

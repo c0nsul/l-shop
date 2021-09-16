@@ -11,13 +11,13 @@ class BasketIsNotEmpty
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param \Closure $next
-     * @param Order $orderModel
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
     {
+
         $sessionOrderId = session('orderId');
 
         if (!is_null($sessionOrderId) && Order::getFullSum() > 0) {

@@ -29,6 +29,7 @@ class OrderController extends Controller
     public function index(Order $orderModel)
     {
         $orders = $orderModel::active()->paginate($this->pageLimit);
+        dd($orders);
         return view("auth.orders.index", compact("orders"));
     }
 

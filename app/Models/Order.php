@@ -16,6 +16,8 @@ class Order extends Model
     public const ORDER_STATUS_0 = 0;
     public const ORDER_STATUS_1 = 1;
 
+    protected $fillable = ['user_id'];
+
     /**
      * @return BelongsToMany
      */

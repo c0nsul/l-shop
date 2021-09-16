@@ -8,9 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    private $pageLimit = 10;
+
     public function index()
     {
-        $orders = Auth::user()->orders()->active()->get();
+        $orders = Auth::user()->orders()->active()->paginate($this->pageLimit);
         return view('auth.orders.index', compact('orders'));
     }
 

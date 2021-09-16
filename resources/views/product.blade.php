@@ -22,7 +22,7 @@
         <img src="{{Storage::url($product->image)}}">
         <p>{{$product->description}}</p>
         <form action="{{route('basket-add', $product)}}" method="post">
-
+            @csrf
             @if($product->isAvailable())
                 <button type="submit" class="btn btn-success" role="button">Add to basket</button>
             @else

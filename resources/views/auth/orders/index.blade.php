@@ -5,7 +5,7 @@
 @section('content')
     <div class="col-md-12">
         <h1>Orders</h1>
-        @if(isset($orders))
+        @if(isset($orders) && count($orders)>0)
         <table class="table">
             <tbody>
             <tr>
@@ -52,7 +52,7 @@
             @endforeach
             </tbody>
         </table>
-        {{ $orders->links() }}
+            {{$orders->links()}}
         @else
             No new orders!
         @endif
