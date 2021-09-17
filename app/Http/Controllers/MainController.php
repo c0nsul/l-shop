@@ -72,7 +72,7 @@ class MainController extends Controller
      * @return Application|Factory|View
      */
     public function product($category, Product $productModel, $productCode) {
-        $product = $productModel::withTrashed()->byCode($productCode)->first();
+        $product = $productModel::withTrashed()->byCode($productCode)->firstOrFail();
         return view('product', compact('product'));
     }
 

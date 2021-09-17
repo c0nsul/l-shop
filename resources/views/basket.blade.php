@@ -44,7 +44,7 @@
                                 </div>
                             </td>
                             <td>{{ $product->price }} rub.</td>
-                            <td>{{ $product->getPriceCalculation($product->pivot->count) }} rub.</td>
+                            <td>{{ $product->getPriceForCount() }} rub.</td>
                         </tr>
                     @endforeach
                 @endisset

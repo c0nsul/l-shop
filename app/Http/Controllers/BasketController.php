@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BasketController extends Controller
 {
@@ -50,6 +51,7 @@ class BasketController extends Controller
 
     /**
      * @param Product $product
+     * @param Basket $basket
      * @return RedirectResponse
      */
     public function basketRemove(Product $product, Basket $basket)
@@ -61,12 +63,13 @@ class BasketController extends Controller
 
     /**
      * @param Request $request
-     * @param Order $orderModel
+     * @param Basket $basket
      * @return RedirectResponse
      */
     public function basketConfirm(Request $request, Basket $basket)
     {
-        $success = $basket->saveOrder($request->name, $request->phone);
+        $email = Auth::check() ? Auth::user()->email : $request->email;
+        $success = $basket->saveOrder($request->name, $request->phone, $request->email, $email);
 
         if ($success) {
             session()->flash('success', 'Thanks for your order!');

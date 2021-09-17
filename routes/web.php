@@ -68,7 +68,7 @@ Route::group(['prefix' => 'basket'], function () {
 
 Route::get("/categories", [MainController::class, "categories"])->name('categories');
 Route::get("/{category}", [MainController::class, "category"])->name('category');
-Route::get('/{category}/{product?}', [MainController::class, "product"])->name('product');
+Route::get('/{category}/{product}', [MainController::class, "product"])->name('product');
 
 Route::get('reset', [ResetController::class, "reset"])->name('reset');
 

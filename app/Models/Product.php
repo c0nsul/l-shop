@@ -40,7 +40,7 @@ class Product extends Model
     /**
      * @return float|int|mixed
      */
-    public function getPriceCalculation()
+    public function getPriceForCount()
     {
         if (!is_null($this->pivot)) {
             return $this->pivot->count * $this->price;

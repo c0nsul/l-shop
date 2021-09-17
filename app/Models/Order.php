@@ -42,7 +42,7 @@ class Order extends Model
     {
         $sum = 0;
         foreach ($this->products()->withTrashed()->get() as $product) {
-            $sum += $product->getPriceCalculation();
+            $sum += $product->getPriceForCount();
         }
         return $sum;
     }

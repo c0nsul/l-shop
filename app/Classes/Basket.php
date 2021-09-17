@@ -2,9 +2,11 @@
 
 namespace App\Classes;
 
+use App\Mail\OrderCreated;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class Basket
 {
@@ -43,26 +45,38 @@ class Basket
     /**
      * @param $name
      * @param $phone
+     * @param $email
      * @return false
      */
-    public function saveOrder($name, $phone)
+    public function saveOrder($name, $phone, $email)
     {
-        if (!$this->countAvailable()) {
+        if (!$this->countAvailable(true)) {
             return false;
         }
+        Mail::to($email)->send(new OrderCreated($name, $this->getOrder()));
+
         return $this->order->saveOrder($name, $phone);
     }
 
     /**
      * @return bool
      */
-    public function countAvailable()
+    public function countAvailable($updateCount = false)
     {
         foreach ($this->order->products as $orderProduct) {
             if ($orderProduct->count < $this->getPivotRow($orderProduct)->count) {
                 return false;
             }
+
+            if ($updateCount) {
+                $orderProduct->count -= $this->getPivotRow($orderProduct)->count;
+            }
         }
+
+        if ($updateCount) {
+            $this->order->products->map->save();
+        }
+
         return true;
     }
 
@@ -102,6 +116,7 @@ class Basket
      */
     public function addProduct(Product $product)
     {
+
         if ($this->order->products->contains($product->id)) {
             $pivotRow = $this->getPivotRow($product);
             $pivotRow->count++;
@@ -109,6 +124,7 @@ class Basket
                 session()->flash('warning', $product->name . ' more items is not available!');
                 return false;
             }
+
             session()->flash('success', $product->name . ' counter increased!');
             $pivotRow->update();
         } else {
