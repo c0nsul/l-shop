@@ -52,6 +52,8 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get("/", [MainController::class, 'index'])->name('index');
 
+Route::post('/subscription/{product}', [\App\Http\Controllers\MainController::class, "subscribe"])->name('subscription');
+
 Route::group(['prefix' => 'basket'], function () {
     Route::post('/add/{product}', [BasketController::class, "basketAdd"])->name('basket-add');
 

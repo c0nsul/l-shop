@@ -3,16 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductsFilterRequest;
+use App\Http\Requests\SubscriptionRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Subscription;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 
 class MainController extends Controller
 {
     private $pageLimit = 6;
+
+    /**
+     * @param Request $request
+     * @param Product $product
+     * @return RedirectResponse
+     */
+    public function subscribe(SubscriptionRequest $request, Product $product): RedirectResponse
+    {
+        Subscription::create([
+            'email' => $request->email,
+            'product_id' => $product->id,
+        ]);
+
+        return redirect()->back()->with('success', 'Thank you, we will let you know when the item arrives.');
+    }
+
 
     /**
      * @param ProductsFilterRequest $request

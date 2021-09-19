@@ -21,12 +21,28 @@
         </div>
         <img src="{{Storage::url($product->image)}}">
         <p>{{$product->description}}</p>
-        <form action="{{route('basket-add', $product)}}" method="post">
-            @csrf
-            @if($product->isAvailable())
+
+        @if($product->isAvailable())
+            <form action="{{route('basket-add', $product)}}" method="post">
+                @csrf
                 <button type="submit" class="btn btn-success" role="button">Add to basket</button>
-            @else
-                Not available
-            @endif
-        </form>
+            </form>
+        @else
+            <span class="h4 text-danger">Not available</span>
+            <br>
+            <br>
+            <span>Message me when product will be available:</span>
+
+            <form method="POST" action="{{ route('subscription', $product) }}">
+                @csrf
+                <input type="text" name="email"></input>
+                <button type="submit">Send</button>
+            </form>
+            <div class="warning text-danger">
+                @if($errors->get('email'))
+                    {!! $errors->get('email')[0] !!}
+                @endif
+            </div>
+        @endif
+
 @endsection
