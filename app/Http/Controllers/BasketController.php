@@ -32,7 +32,7 @@ class BasketController extends Controller
     {
         $order = $basket->getOrder();
         if (!$basket->countAvailable()) {
-            session()->flash('warning', 'More items is not available!');
+            session()->flash('warning', __('basket.you_cant_order_more'));
             return redirect()->route('basket');
         }
         return view('order', compact('order'));
@@ -72,9 +72,9 @@ class BasketController extends Controller
         $success = $basket->saveOrder($request->name, $request->phone, $request->email, $email);
 
         if ($success) {
-            session()->flash('success', 'Thanks for your order!');
+            session()->flash('success',  __('basket.you_order_confirmed'));
         } else {
-            session()->flash('warning', 'Something went wrong');
+            session()->flash('warning', __('basket.you_cant_order_more'));
         }
         Order::eraseOrderSum();
         return redirect()->route('index');

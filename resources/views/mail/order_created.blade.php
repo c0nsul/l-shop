@@ -1,6 +1,6 @@
-<p>Hello {{ $name }}</p>
+<p>@lang('mail.order_created.dear') {{ $name }}</p>
 
-<p>Your order is created! Your total payment: {{ $fullSum }} rub</p>
+<p>@lang('mail.order_created.your_order') {{ $fullSum }} @lang('mail.order_created.created')</p>
 
 <table>
     <tbody>
@@ -17,8 +17,8 @@
                     {!! $product->description !!}
                 </div>
             </td>
-            <td>{{ $product->price }} rub.</td>
-            <td>{{ $product->getPriceForCount() }} rub.</td>
+            <td>{{ $product->price }} @lang('main.rub').</td>
+            <td>{{ $product->getPriceForCount() }} @lang('main.rub').</td>
         </tr>
     @endforeach
     </tbody>

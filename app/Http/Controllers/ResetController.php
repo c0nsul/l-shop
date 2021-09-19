@@ -25,7 +25,7 @@ class ResetController extends Controller
             }
         }
 
-        session()->flash('success', 'Project was reset by default');
+        session()->flash('success', __('main.project_reset'));
         return redirect()->route('index');
     }
 }

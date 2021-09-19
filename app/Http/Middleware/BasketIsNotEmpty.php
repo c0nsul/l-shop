@@ -23,7 +23,7 @@ class BasketIsNotEmpty
         if (!is_null($sessionOrderId) && Order::getFullSum() > 0) {
                 return $next($request);
         }
-        session()->flash('warning', 'Your basket is empty');
+        session()->flash('warning', __('basket.cart_is_empty'));
         return redirect()->route('index');
     }
 }

@@ -99,11 +99,11 @@ class Basket
             $pivotRow = $this->getPivotRow($product);
             if ($pivotRow->count < 2) {
                 $this->order->products()->detach($product->id);
-                session()->flash('warning', $product->name . ' removed from basket!');
+                session()->flash('warning',  __('basket.removed'). $product->name);
             } else {
                 $pivotRow->count--;
                 $pivotRow->update();
-                session()->flash('warning', $product->name . ' counter decreased!');
+                session()->flash('warning', __('basket.removed'). $product->name);
             }
         }
 
@@ -121,18 +121,18 @@ class Basket
             $pivotRow = $this->getPivotRow($product);
             $pivotRow->count++;
             if ($pivotRow->count > $product->count) {
-                session()->flash('warning', $product->name . ' more items is not available!');
+                session()->flash('warning', $product->name . __('basket.you_cant_order_more'));
                 return false;
             }
 
-            session()->flash('success', $product->name . ' counter increased!');
+            session()->flash('success', __('basket.added').$product->name);
             $pivotRow->update();
         } else {
             if ($product->count == 0) {
                 return false;
             }
             $this->order->products()->attach($product->id);
-            session()->flash('success', $product->name . ' added to basket!');
+            session()->flash('success', __('basket.added') . $product->name);
         }
 
         Order::changeFullSum($product->price);

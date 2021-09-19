@@ -49,10 +49,10 @@
                 @guest
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item @if(Route::currentRouteNamed('login')) active @endif" >
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link" href="{{ route('login') }}">@lang('main.login')</a>
                         </li>
                         <li class="nav-item @if(Route::currentRouteNamed('register')) active @endif" >
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            <a class="nav-link" href="{{ route('register') }}">@lang('main.register')</a>
                         </li>
                     </ul>
                 @endguest

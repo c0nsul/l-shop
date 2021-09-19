@@ -1,3 +1,3 @@
-Hello sir, product {{ $product->name }} is available now.
+@lang('mail.subscription.dear_client') {{ $product->name }} @lang('mail.subscription.appeared_in_stock').
 
-<a href="{{ route('product', [$product->category->code, $product->code]) }}">Get more details</a>
+<a href="{{ route('product', [$product->category->code, $product->code]) }}">@lang('mail.subscription.more_info')</a>

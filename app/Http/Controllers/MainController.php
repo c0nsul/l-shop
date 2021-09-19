@@ -12,11 +12,27 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 
 class MainController extends Controller
 {
     private $pageLimit = 6;
+
+    /**
+     * @param $locale
+     * @return RedirectResponse
+     */
+    public function changeLocale($locale): RedirectResponse
+    {
+        $availableLocales = ['ru', 'en'];
+        if (!in_array($locale, $availableLocales)) {
+            $locale = config('app.locale');
+        }
+        session(['locale' => $locale]);
+        App::setLocale($locale);
+        return redirect()->back();
+    }
 
     /**
      * @param Request $request

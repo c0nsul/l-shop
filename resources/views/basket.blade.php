@@ -1,19 +1,21 @@
 @extends('layouts.master')
 
-@section('title', 'Корзина')
+@section('title', __('basket.cart'))
 
 @section('content')
-        <h1>Basket</h1>
+        <h1>@lang('basket.cart')</h1>
+
         @if(isset($order->products) && count($order->products)>0)
-        <p>Checkout</p>
+
+        <p>@lang('basket.ordering')</p>
         <div class="panel">
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Count</th>
-                    <th>Price</th>
-                    <th>Final price</th>
+                    <th>@lang('basket.name')</th>
+                    <th>@lang('basket.count')</th>
+                    <th>@lang('basket.price')</th>
+                    <th>@lang('basket.cost')</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,25 +45,25 @@
                                     </form>
                                 </div>
                             </td>
-                            <td>{{ $product->price }} rub.</td>
-                            <td>{{ $product->getPriceForCount() }} rub.</td>
+                            <td>{{ $product->price }} @lang('main.rub').</td>
+                            <td>{{ $product->getPriceForCount() }} @lang('main.rub').</td>
                         </tr>
                     @endforeach
                 @endisset
                 <tr>
-                    <td colspan="3">Total:</td>
-                    <td>{{ isset( $order) ? $order->getFullSum() : 0 }} rub.</td>
+                    <td colspan="3">@lang('basket.full_cost'):</td>
+                    <td>{{ isset( $order) ? $order->getFullSum() : 0 }} @lang('main.rub').</td>
                 </tr>
                 </tbody>
             </table>
             <br>
             <div class="btn-group pull-right" role="group">
-                    <a type="button" class="btn btn-success" href="{{route("basket-place")}}">Checkout</a>
+                    <a type="button" class="btn btn-success" href="{{route("basket-place")}}">@lang('basket.place_order')</a>
             </div>
         </div>
         @else
         <div class="panel" >
-            Basket is empty!
+            @lang('basket.cart_is_empty')
         </div>
         @endif
 @endsection
