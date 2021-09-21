@@ -8,6 +8,10 @@ trait Translatable
 {
     protected $defaultLocale = 'ru';
 
+    /**
+     * @param $originFieldName
+     * @return mixed
+     */
     public function __($originFieldName)
     {
         $locale = App::getLocale() ?? $this->defaultLocale;
