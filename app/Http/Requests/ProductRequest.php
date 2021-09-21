@@ -36,11 +36,6 @@ class ProductRequest extends FormRequest
             'recommend' => 'string',
         ];
 
-        /*
-        if ($this->route()->named('products.update')) {
-            $rules['code'] .= ',' . $this->route()->parameter('product')->id;
-        } */
-
         return $rules;
     }
 }

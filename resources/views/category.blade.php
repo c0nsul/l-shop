@@ -4,11 +4,11 @@
 
 @section('content')
     <h1>
-        {{$category->name}}
+        {{$category->__('name')}}
     </h1>
     <h4>({{$category->products->count()}} items)</h4>
     <p>
-        {{ $category->description }}
+        {{ $category->__('description') }}
     </p>
     <div class="row">
         @foreach($category->products as $product)

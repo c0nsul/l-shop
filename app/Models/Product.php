@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,7 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Translatable;
 
     private const setTrue = 1;
     private const setFalse = 0;
@@ -25,7 +27,9 @@ class Product extends Model
         'new',
         'hit',
         'recommend',
-        'count'
+        'count',
+        'name_en',
+        'description_en'
     ];
 
 

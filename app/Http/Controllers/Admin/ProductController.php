@@ -46,7 +46,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $params = $request->validated();
+        $params = $request->all();
 
         if ($request->has('image')) {
             $path = $request->file('image')->store('products');
@@ -89,7 +89,7 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        $params = $request->validated();
+        $params = $request->all();
 
         if ($request->has('image')) {
             Storage::delete($product->image);

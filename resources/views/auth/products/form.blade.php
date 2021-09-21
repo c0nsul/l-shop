@@ -45,6 +45,18 @@
                     </div>
                 </div>
                 <br>
+
+                    <div class="input-group row">
+                        <label for="name_en" class="col-sm-2 col-form-label">Name ENG: </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="name_en" id="name_en"
+                                   value="@isset($product){{ $product->name_en }}@endisset">
+
+                            @include('auth.layouts.error', ['fieldName' => 'name_en'])
+                        </div>
+                    </div>
+                    <br>
+
                 <div class="input-group row">
                     <label for="category_id" class="col-sm-2 col-form-label">Category: </label>
                     <div class="col-sm-6">
@@ -70,6 +82,18 @@
                     </div>
                 </div>
                 <br>
+
+                    <div class="input-group row">
+                        <label for="description_en" class="col-sm-2 col-form-label">Description(ENG): </label>
+                        <div class="col-sm-6">
+								<textarea name="description_en" id="description_en" cols="72"
+                                          rows="7">@isset($product){{ $product->description_en }}@endisset</textarea>
+
+                            @include('auth.layouts.error', ['fieldName' => 'description_en'])
+                        </div>
+                    </div>
+                    <br>
+
                 <div class="input-group row">
                     <label for="image" class="col-sm-2 col-form-label">Image: </label>
                     <div class="col-sm-10">

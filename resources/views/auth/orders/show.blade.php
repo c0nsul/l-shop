@@ -7,7 +7,7 @@
     @if(isset($products) && count($products)>0)
         <p>Order Details:</p>
         <br/>
-        <p>Name: <b>{{ $order->name }}</b></p>
+        <p>Name: <b>{{ $order->__('name') }}</b></p>
         <p>Phone: <b>{{ $order->phone }}</b></p>
 
 

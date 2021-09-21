@@ -24,12 +24,20 @@
                 <td>{{ $category->code }}</td>
             </tr>
             <tr>
-                <td>Name</td>
+                <td>Name(ru)</td>
                 <td>{{ $category->name }}</td>
             </tr>
             <tr>
-                <td>Description</td>
+                <td>Name(eng)</td>
+                <td>{{ $category->name_en}}</td>
+            </tr>
+            <tr>
+                <td>Description(RU)</td>
                 <td>{{ $category->description }}</td>
+            </tr>
+            <tr>
+                <td>Description(EN)</td>
+                <td>{{ $category->description_en }}</td>
             </tr>
             <tr>
                 <td>Image</td>

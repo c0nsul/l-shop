@@ -39,21 +39,34 @@
                 </div>
                 <br>
                 <div class="input-group row">
-                    <label for="name" class="col-sm-2 col-form-label">Name: </label>
+                    <label for="name" class="col-sm-2 col-form-label">Name RUS: </label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="name" id="name"
-                               value="{{ old('name', isset($category->name) ? $category->name : null) }}">
+                               value="{{ old('name', $category->name ?? null) }}">
 
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                 </div>
+                    <br>
+                    <div class="input-group row">
+                        <label for="name_en" class="col-sm-2 col-form-label">Name ENG: </label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="name_en" id="name_en"
+                                   value="{{ old('name_en', $category->name_en ?? null) }}">
+
+                            @error('name_en')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
                 <br>
                 <div class="input-group row">
-                    <label for="description" class="col-sm-2 col-form-label">Description: </label>
+                    <label for="description" class="col-sm-2 col-form-label">Description RU: </label>
                     <div class="col-sm-6">
-                        <textarea name="description" id="description" cols="72" rows="7">{{old('description', isset($category->description) ? $category->description : null) }}
+                        <textarea name="description" id="description" cols="72" rows="7">{{old('description', $category->description ?? null) }}
                         </textarea>
 
                         @error('description')
@@ -62,6 +75,20 @@
                     </div>
                 </div>
                 <br>
+
+                    <div class="input-group row">
+                        <label for="description_en" class="col-sm-2 col-form-label">Description ENG: </label>
+                        <div class="col-sm-6">
+                        <textarea name="description_en" id="description_en" cols="72" rows="7">{{old('description_en', $category->description_en ?? null) }}
+                        </textarea>
+
+                            @error('description_en')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <br>
+
                 <div class="input-group row">
                     <label for="image" class="col-sm-2 col-form-label">Image: </label>
                     <div class="col-sm-10">
