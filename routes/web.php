@@ -69,6 +69,7 @@ Route::middleware(['set_locale'])->group(function () {
     });
 
     Route::get('locale/{locale}', [MainController::class, "changeLocale"])->name('locale');
+    Route::get('currency/{currencyCode}',  [MainController::class, "changeCurrency"])->name('currency');
 
     Route::get("/categories", [MainController::class, "categories"])->name('categories');
     Route::get("/{category}", [MainController::class, "category"])->name('category');

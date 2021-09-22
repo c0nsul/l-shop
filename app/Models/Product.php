@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Translatable;
+use App\Services\CurrencyConversion;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -141,5 +142,14 @@ class Product extends Model
     public function isRecommend(): bool
     {
         return $this->recommend === self::setTrue;
+    }
+
+    /**
+     * @param $value
+     * @return float
+     */
+    public function getPriceAttribute($value): float
+    {
+        return round(CurrencyConversion::convert($value), 2);
     }
 }

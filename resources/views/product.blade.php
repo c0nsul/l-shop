@@ -5,7 +5,7 @@
 @section('content')
         <h5>{{$product->Category->name}}</h5>
         <h1>{{$product->__('name')}}</h1>
-        <p>@lang('product.price'): <b>{{ $product->price }} @lang('main.rub').</b></p>
+        <p>@lang('product.price'): <b>{{ $product->price }} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</b></p>
         <div >
             @if($product->isNew())
                 <span class="badge badge-success">@lang('main.properties.new')</span>

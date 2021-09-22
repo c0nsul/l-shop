@@ -17,7 +17,7 @@
         <div class="caption">
             <h5>{{isset($category) ? $category->code : $product->Category->code}}</h5>
             <h3>{{$product->__('name')}}</h3>
-            <p>{{$product->price}} @lang('main.rub').</p>
+            <p>{{$product->price}} {{ App\Services\CurrencyConversion::getCurrencySymbol() }}</p>
             <p>
                 <form action="{{route('basket-add', $product)}}" method="post">
                 @csrf
